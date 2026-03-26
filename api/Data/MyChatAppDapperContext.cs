@@ -35,5 +35,6 @@ namespace api.Data
 
             return await connection.ExecuteAsync(sql, parameter) > 0;
         }
+    
     }
 }

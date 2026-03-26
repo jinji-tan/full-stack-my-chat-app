@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -19,22 +19,22 @@ namespace api.Controllers
             _auth = auth;
         }
 
-        [HttpPost("/api/register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserDto userDto)
         {
             if (await _auth.UserExists(userDto.Email))
                 return BadRequest("Email already exists.");
 
-            var user = await _auth.Register(userDto);
+            bool response = await _auth.Register(userDto);
 
-            if (user == false)
+            if (!response)
                 return BadRequest("Failed to register.");
 
-            return Ok("Successfully registered.");
+            return Ok(new { message = "Successfully registered." });
         }
 
 
-        [HttpPost("/api/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(AuthDto authDto)
         {
             var user = await _auth.GetUserByEmail(authDto.Email);
@@ -48,7 +48,11 @@ namespace api.Controllers
             if (!computedHash.SequenceEqual(user.PasswordHash))
                 return Unauthorized("Invalid email or password.");
 
-            return Ok(new { token = _token.CreateToken(user.Email) });
+            return Ok(new
+            {
+                token = _token.CreateToken(user.Email),
+                fullName = user.FirstName + " " + user.LastName
+            });
         }
     }
 }

@@ -105,4 +105,4 @@ fullstack-my-chat-app/
 - [x] JWT Integration
 - [x] Real-time Messaging Implementation
 - [x] Message History Optimization
-- [x] User Profile Customization
+<!-- - [x] User Profile Customization -->

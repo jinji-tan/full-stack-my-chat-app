@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUserApi } from "../services/api";
 
-const UserList = ({ setReceiverName, currentReceiverName }) => {
+const UserList = ({ setReceiverName, setReceiverId, currentReceiverName }) => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -12,15 +12,17 @@ const UserList = ({ setReceiverName, currentReceiverName }) => {
             try {
                 const data = await getUserApi();
 
-                const token = localStorage.getItem("token");
+                const myId = parseInt(localStorage.getItem("userId"));
 
-                const formattedUsers = data.map((u) => {
+                // const token = localStorage.getItem("token");
+
+                const formattedUsers = data.filter(u => u.id !== myId).map((u) => {
                     return {
                         id: u.id,
                         name: `${u.firstName} ${u.lastName}`,
-                        initial: u.firstName.charAt(0).toUpperCase(),
+                        initial: u.firstName ? u.firstName.charAt(0).toUpperCase() : "?",
                         // Use the status coming FROM the database/API, not your local variable
-                        status: "offline"
+                        status: "online"
                     };
                 });
 
@@ -62,7 +64,7 @@ const UserList = ({ setReceiverName, currentReceiverName }) => {
             <div className="user-list-content">
                 {users.map((user) => (
                     <div key={user.id} className={`user-item ${currentReceiverName === user.name ? `active` : ``}`}
-                        onClick={() => setReceiverName(user.name)}>
+                        onClick={() => { setReceiverId(user.id); setReceiverName(user.name); }}>
                         <div className="user-avatar">
                             {user.initial}
                             <span className={`status-dot ${user.status}`}></span>

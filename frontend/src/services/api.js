@@ -77,7 +77,7 @@ export const deleteUserApi = async (id) => {
 export const getUserApi = async () => {
     const response = await fetch('/api/User', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: getHeaders(),
     });
 
     return handleResponse(response);
@@ -87,7 +87,31 @@ export const searchUsersApi = async (searchTerm) => {
     const encodedTerm = encodeURIComponent(searchTerm);
     const response = await fetch(`/api/User/${encodedTerm}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: getHeaders(),
+    });
+
+    return handleResponse(response);
+}
+
+
+// ChatController
+export const getChatsApi = async (id) => {
+    const response = await fetch(`/api/Chat/${id}`, {
+        method: 'GET',
+        headers: getHeaders()
+    });
+
+    return handleResponse(response);
+}
+
+export const sendMessageApi = async (receiverId, content) => {
+    const response = await fetch('/api/Chat', {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+            ReceiverId: receiverId,
+            Content: content
+        }),
     });
 
     return handleResponse(response);

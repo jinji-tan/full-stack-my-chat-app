@@ -8,6 +8,8 @@ const Home = ({ setPage }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [isUserListOpen, setIsUserListOpen] = useState(false);
+
+    const [receiverId, setReceiverId] = useState(null);
     const [receiverName, setReceiverName] = useState("");
 
     const fullName = localStorage.getItem("fullName");
@@ -20,10 +22,10 @@ const Home = ({ setPage }) => {
         setPage("login")
     }
 
-    const goToSettings = () => {
-        setPage("settings");
-        setIsMenuOpen(false);
-    };
+    // const goToSettings = () => {
+    //     setPage("settings");
+    //     setIsMenuOpen(false);
+    // };
 
     const handleChat = async () => {
         setIsChatOpen(!isChatOpen);
@@ -36,9 +38,9 @@ const Home = ({ setPage }) => {
             <div className="menu-wrapper">
                 {isMenuOpen && (
                     <div className="dropdown-menu">
-                        <button className="menu-item">
+                        {/* <button className="menu-item">
                             <span className="icon">⚙</span> Settings
-                        </button>
+                        </button> */}
                         <button className="menu-item" onClick={handleChat}>
                             <span className="icon" >💬</span> Chat
                         </button>
@@ -67,8 +69,20 @@ const Home = ({ setPage }) => {
                 <p className="home-page-greet-user">Hi, {fullName}</p>
             </div>}
 
-            {isChatOpen && <Chat receiverName={receiverName} />}
-            {isUserListOpen && <UserList setReceiverName={setReceiverName} currentReceiverName={receiverName} />}
+            {isChatOpen && receiverId && (
+                <Chat
+                    receiverId={receiverId}
+                    receiverName={receiverName}
+                />
+            )}
+
+            {isUserListOpen && (
+                <UserList
+                    setReceiverName={setReceiverName}
+                    setReceiverId={setReceiverId}
+                    currentReceiverName={receiverName}
+                />
+            )}
         </div>
 
     )

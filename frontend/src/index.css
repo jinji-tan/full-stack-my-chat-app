@@ -445,26 +445,49 @@ button:active {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  background-color: #0b0b0b;
   /* Spaced out like your image */
 }
 
 .message-wrapper {
   display: flex;
-  max-width: 60%;
+  width: 100%;
+
 }
 
 .message-wrapper.sender {
-  align-self: flex-end;
+  justify-content: flex-end;
+  text-align: right;
 }
 
+
+
 .message-wrapper.receiver {
-  align-self: flex-start;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .message-bubble {
   padding: 12px 20px;
   font-size: 15px;
   line-height: 1.4;
+  max-width: 60%;
+}
+
+.message-wrapper.receiver .message-bubble {
+  background: #2f3031;
+  color: #e4e6eb;
+  border-radius: 18px;
+  border-top-left-radius: 4px;
+  /* Squared corner */
+}
+
+.message-wrapper.sender .message-bubble {
+  background: #0084ff;
+  color: white;
+  border-radius: 18px;
+  border-top-right-radius: 4px;
+  /* Squared corner */
 }
 
 /* Receiver: Dark Gray Pill */
@@ -472,6 +495,7 @@ button:active {
   background: #2f3031;
   color: #e4e6eb;
   border-radius: 18px;
+  border-top-left-radius: 4px;
 }
 
 /* Sender: Bright Blue Pill */
@@ -479,6 +503,7 @@ button:active {
   background: #0084ff;
   color: white;
   border-radius: 18px;
+  border-top-right-radius: 4px;
 }
 
 /* --- INPUT AREA (Bottom Bar) --- */

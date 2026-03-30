@@ -31,6 +31,7 @@ const Login = ({ setPage }) => {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("fullName", data.fullName);
+            localStorage.setItem("userId", data.userId);
 
             setPage("home")
         } catch (error) {

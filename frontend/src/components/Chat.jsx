@@ -58,7 +58,6 @@ export const Chat = ({ receiverId, receiverName }) => {
 
             <div className="chat-messages">
                 {messages.map((msg) => {
-                    // Force both to numbers to guarantee a match
                     const myId = localStorage.getItem("userId");
                     const isMe = String(msg.senderId) === String(myId);
 
@@ -73,7 +72,7 @@ export const Chat = ({ receiverId, receiverName }) => {
                         </div>
                     );
                 })}
-                {/* Invisible element to anchor the scroll */}
+                
                 <div ref={scrollRef} />
             </div>
 

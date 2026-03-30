@@ -24,6 +24,9 @@ A real-time chat application built with a modern tech stack, focusing on perform
 ### Overall Chat Experience
 ![Chat Demo](./assets/chat-demo.gif)
 
+### API Documentation (Swagger)
+![Swagger UI](./assets/swagger-ui.png)
+
 
 ---
 

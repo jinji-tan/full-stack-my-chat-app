@@ -21,7 +21,6 @@ const UserList = ({ setReceiverName, setReceiverId, currentReceiverName }) => {
                         id: u.id,
                         name: `${u.firstName} ${u.lastName}`,
                         initial: u.firstName ? u.firstName.charAt(0).toUpperCase() : "?",
-                        // Use the status coming FROM the database/API, not your local variable
                         status: "online"
                     };
                 });

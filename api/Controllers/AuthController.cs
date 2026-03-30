@@ -35,6 +35,7 @@ namespace api.Controllers
 
             return Ok(new
             {
+                userId = user.Id,
                 message = "Successfully registered.",
                 token = _token.CreateToken(user.Id, user.Email)
             });
@@ -51,6 +52,7 @@ namespace api.Controllers
 
             return Ok(new
             {
+                userId = user.Id,
                 token = _token.CreateToken(user.Id, user.Email),
                 fullName = user.FirstName + " " + user.LastName
             });

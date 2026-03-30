@@ -9,13 +9,13 @@ using System.Security.Claims;
 namespace ChatApp.API.Controllers
 {
     [ApiController]
-    [Route("api/messages")]
+    [Route("/api/[controller]")]
     [Authorize]
-    public class MessagesController : ControllerBase
+    public class ChatController : ControllerBase
     {
         private readonly IMessageRepository _messageRepo;
 
-        public MessagesController(IMessageRepository messageRepo)
+        public ChatController(IMessageRepository messageRepo)
         {
             _messageRepo = messageRepo;
         }
